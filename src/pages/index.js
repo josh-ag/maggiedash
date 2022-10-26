@@ -43,11 +43,11 @@ const LineChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: "bottom",
       },
       title: {
-        display: true,
-        text: "",
+        // display: true,
+        // text: "work reports",
       },
     },
   };
@@ -102,6 +102,18 @@ const LineChart = () => {
 };
 
 const DoughnutChart = () => {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      title: {
+        // display: true,
+        // text: "work reports",
+      },
+    },
+  };
   const labels = [
     "Frontend Engineer",
     "Backend Engineer",
@@ -142,11 +154,11 @@ const DoughnutChart = () => {
   return (
     <Doughnut
       data={data}
+      options={options}
       style={{
         width: "auto",
         height: "auto",
         maxWidth: "100%",
-        marginTop: 16,
       }}
     />
   );
@@ -171,7 +183,10 @@ const DashboardPage = () => {
                 to={`${item.path}`}
                 key={item.title}
                 sx={(theme) => ({
-                  color: theme.palette.primary.main,
+                  color:
+                    location.hash === item.path
+                      ? theme.palette.primary.main
+                      : "#596884",
                   fontSize: 16,
                   fontWeight: "500",
                   width: "auto",
@@ -201,6 +216,7 @@ const DashboardPage = () => {
         </Typography>
         <Stack direction="row" spacing={2}>
           <Button
+            size="small"
             variant="outlined"
             startIcon={<CalendarTodayOutlined />}
             endIcon={<KeyboardArrowDownOutlined />}
@@ -212,6 +228,7 @@ const DashboardPage = () => {
             startIcon={<FileUploadOutlined />}
             sx={{
               bgcolor: green[400],
+              textTransform: "capitalize",
               ":hover": {
                 bgcolor: green[600],
               },
@@ -245,12 +262,9 @@ const DashboardPage = () => {
                 elevation={0}
               >
                 <Typography
-                  variant="h5"
-                  sx={{
-                    color: grey[500],
-                    // fontWeight: "900",
-                    fontSize: 18,
-                  }}
+                  variant="subtitle1"
+                  sx={{ color: grey[600], fontWeight: 600 }}
+                  noWrap
                 >
                   Employee Attendance
                 </Typography>
@@ -259,7 +273,7 @@ const DashboardPage = () => {
                   direction="row"
                   sx={{ p: 4, position: "relative" }}
                 >
-                  <Typography variant="h4" sx={{ color: grey[600] }}>
+                  <Typography variant="h5" sx={{ color: grey[600] }} noWrap>
                     98
                   </Typography>
                   <GroupOutlined
@@ -284,11 +298,9 @@ const DashboardPage = () => {
                 elevation={0}
               >
                 <Typography
-                  variant="h5"
-                  sx={{
-                    color: grey[500],
-                    fontSize: 18,
-                  }}
+                  variant="subtitle1"
+                  sx={{ color: grey[600], fontWeight: 600 }}
+                  noWrap
                 >
                   Employee Of The Month
                 </Typography>
@@ -297,7 +309,7 @@ const DashboardPage = () => {
                   direction="row"
                   sx={{ p: 4, position: "relative" }}
                 >
-                  <Typography variant="h4" sx={{ color: grey[600] }}>
+                  <Typography variant="h5" sx={{ color: grey[600] }}>
                     94
                   </Typography>
                   <AccountCircleOutlined
@@ -314,45 +326,73 @@ const DashboardPage = () => {
             </Fade>
           </Stack>
 
-          <Fade in={true} timeout={600}>
-            <Paper sx={{ p: 4, ml: 2, flex: 1 }} elevation={0}>
-              <Typography variant="h5" sx={{ color: grey[500], fontSize: 18 }}>
+          <Fade in={true} timeout={{ appear: 500, enter: 600, exit: 400 }}>
+            <Paper
+              sx={{
+                p: 4,
+                ml: 2,
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+              }}
+              elevation={0}
+            >
+              <Typography
+                variant="subtitle1"
+                sx={{ color: grey[600], fontWeight: 600 }}
+                noWrap
+              >
                 Internal Attendance
               </Typography>
-              <Typography variant="body1" sx={{ color: grey[600], my: 2 }}>
-                congratulation Jane Doe! You have been choosen as the best
-                employee of the month. Keep up the good work and don't relent.
+
+              <Typography
+                variant="body2"
+                sx={{ color: grey[600], my: 1, textAlign: "justify" }}
+              >
+                Congratulation{" "}
+                <Typography
+                  variant="subtitle1"
+                  sx={{ display: "inline", color: grey[700], fontWeight: 600 }}
+                >
+                  Jane Doe
+                </Typography>
+                ! You have been choosen as the best employee of the month. Keep
+                up the good work and don't relent.
               </Typography>
               <Stack
                 direction={"row"}
-                spacing={2}
-                sx={{ alignItems: "center" }}
+                spacing={4}
+                sx={{
+                  alignItems: "center",
+                  alignSelf: "center",
+                  py: 1,
+                }}
               >
                 <Box
                   component={"img"}
                   src={User}
-                  sx={{ width: 200, height: 250 }}
+                  sx={{ width: 200, height: 200 }}
                 />
                 <Box>
                   <Typography
+                    variant="subtitle1"
                     sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
+                      color: grey[700],
                       textAlign: "center",
+                      fontWeight: 600,
                     }}
                   >
                     Jane Doe
                   </Typography>
                   <Typography
-                    variant="subtitle1"
-                    sx={{ color: grey[500], textAlign: "center", fontSize: 18 }}
+                    variant="caption"
+                    sx={{ color: grey[500], textAlign: "center" }}
                   >
                     Frontend Engineer
                   </Typography>
                   <Typography
                     variant="subtitle1"
-                    sx={{ color: grey[600], textAlign: "center", fontSize: 14 }}
+                    sx={{ color: grey[700], textAlign: "center" }}
                   >
                     Development Team
                   </Typography>
@@ -361,51 +401,48 @@ const DashboardPage = () => {
 
               <Stack
                 direction={"row"}
-                sx={{ justifyContent: "space-between", mt: 2 }}
+                sx={{ justifyContent: "space-around", mt: 1 }}
               >
                 <Box>
                   <Typography
+                    variant="subtitle2"
                     sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
+                      color: grey[600],
                       mb: 1,
                     }}
                   >
                     Performance
                   </Typography>
-                  <Typography variant="body1" sx={{ color: green[400] }}>
+                  <Typography variant="body2" sx={{ color: green[400] }}>
                     + 91% <ArrowUpward fontSize="small" />
                   </Typography>
                 </Box>
                 <Box>
                   <Typography
+                    variant="subtitle2"
                     sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
+                      color: grey[600],
                       mb: 1,
                     }}
                   >
                     Attendance
                   </Typography>
-                  <Typography variant="body1" sx={{ color: green[400] }}>
+                  <Typography variant="body2" sx={{ color: green[400] }}>
                     + 98% <ArrowUpward fontSize="small" />
                   </Typography>
                 </Box>
 
                 <Box>
                   <Typography
+                    variant="subtitle2"
                     sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
+                      color: grey[600],
                       mb: 1,
                     }}
                   >
                     Projects
                   </Typography>
-                  <Typography variant="body1" sx={{ color: green[400] }}>
+                  <Typography variant="body2" sx={{ color: green[400] }}>
                     + 89 <ArrowUpward fontSize="small" />
                   </Typography>
                 </Box>
@@ -418,11 +455,8 @@ const DashboardPage = () => {
           <Paper sx={{ flex: 4, bgcolor: blue[50], ml: 2, p: 2 }} elevation={0}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <Typography
-                variant="h5"
-                sx={{
-                  color: grey[500],
-                  fontSize: 18,
-                }}
+                variant="subtitle1"
+                sx={{ color: grey[600], fontWeight: 600 }}
               >
                 Schedule
               </Typography>
@@ -430,19 +464,18 @@ const DashboardPage = () => {
               <Button
                 variant="contained"
                 startIcon={<AddOutlined />}
-                sx={{ borderRadius: 10 }}
+                sx={{ borderRadius: 10, textTransform: "capitalize" }}
                 size="small"
                 disableElevation
               >
-                add schedule
+                <Typography noWrap>set schedule</Typography>
               </Button>
             </Stack>
             <Typography
+              variant="subtitle2"
               sx={{
-                color: grey[500],
-                fontWeight: "900",
-                fontSize: 18,
-                my: 4,
+                color: grey[600],
+                mt: 4,
               }}
             >
               1st Aug 2022
@@ -450,7 +483,7 @@ const DashboardPage = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "flex-start",
+                justifyContent: "center",
                 flexDirection: "column",
                 mt: 6,
               }}
@@ -460,78 +493,14 @@ const DashboardPage = () => {
                 spacing={4}
                 sx={{
                   mb: 4,
+                  alignSelf: "center",
                 }}
               >
                 <Box>
-                  <Typography
-                    sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
-                      textAlign: "center",
-                    }}
-                  >
+                  <Typography variant="subtitle2" sx={{ color: grey[600] }}>
                     9:00
                   </Typography>
-                  <Typography
-                    sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
-                      textAlign: "center",
-                    }}
-                  >
-                    A.M
-                  </Typography>
-                </Box>
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ bgcolor: blue[400], width: 5 }}
-                />
-
-                <Box>
-                  <Typography
-                    sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                    }}
-                  >
-                    Development
-                  </Typography>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      color: grey[600],
-                      fontWeight: "900",
-                      fontSize: 14,
-                    }}
-                  >
-                    Meet with vendor
-                  </Typography>
-                </Box>
-              </Stack>
-
-              <Stack direction={"row"} spacing={2}>
-                <Box>
-                  <Typography
-                    sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
-                      textAlign: "center",
-                    }}
-                  >
-                    11:00
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
-                      textAlign: "center",
-                    }}
-                  >
+                  <Typography variant="subtitle2" sx={{ color: grey[600] }}>
                     A.M
                   </Typography>
                 </Box>
@@ -543,20 +512,72 @@ const DashboardPage = () => {
 
                 <Box>
                   <Typography
+                    variant="body1"
                     sx={{
                       color: grey[500],
-                      fontWeight: "900",
-                      fontSize: 18,
                     }}
                   >
                     Development
                   </Typography>
                   <Typography
+                    variant="subtitle1"
+                    sx={{
+                      color: grey[600],
+                    }}
+                  >
+                    Meet with vendor
+                  </Typography>
+                </Box>
+              </Stack>
+
+              <Stack
+                direction={"row"}
+                spacing={4}
+                sx={{
+                  mb: 4,
+                  alignSelf: "center",
+                }}
+              >
+                <Box>
+                  <Typography
                     variant="subtitle2"
                     sx={{
                       color: grey[600],
-                      fontWeight: "900",
-                      fontSize: 14,
+
+                      textAlign: "center",
+                    }}
+                  >
+                    2:00
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      color: grey[600],
+                      textAlign: "center",
+                    }}
+                  >
+                    P.M
+                  </Typography>
+                </Box>
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  sx={{ bgcolor: blue[400], width: 5 }}
+                />
+
+                <Box>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: grey[500],
+                    }}
+                  >
+                    Engineering
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      color: grey[600],
                     }}
                   >
                     System Testing
@@ -568,8 +589,9 @@ const DashboardPage = () => {
                 variant="contained"
                 sx={{
                   bgcolor: green[400],
-                  alignSelf: "flex-start",
-                  mt: 4,
+                  alignSelf: "center",
+                  textTransform: "capitalize",
+                  mt: 2,
                   ":hover": { bgcolor: green[600] },
                 }}
                 disableElevation
@@ -592,11 +614,12 @@ const DashboardPage = () => {
           <Stack direction="row" sx={{ justifyContent: "space-between" }}>
             <Stack direction={"row"} sx={{ alignItems: "center" }}>
               <Typography
+                variant="subtitle1"
                 sx={{
-                  color: grey[500],
-                  fontWeight: "900",
-                  fontSize: 18,
+                  color: grey[600],
+                  fontWeight: 600,
                 }}
+                noWrap
               >
                 Work Reports
               </Typography>
@@ -609,12 +632,14 @@ const DashboardPage = () => {
               startIcon={<CalendarMonth />}
               variant="outlined"
               endIcon={<KeyboardArrowDownOutlined />}
-              size="small"
+              sx={{ textTransform: "capitalize" }}
             >
               this month
             </Button>
           </Stack>
-          <LineChart />
+          <Box sx={{ mt: 2 }}>
+            <LineChart />
+          </Box>
         </Paper>
 
         <Paper
@@ -626,16 +651,18 @@ const DashboardPage = () => {
           elevation={0}
         >
           <Typography
+            variant="subtitle1"
             sx={{
-              color: grey[500],
-              fontWeight: "900",
-              fontSize: 18,
+              color: grey[600],
+              fontWeight: 600,
             }}
+            noWrap
           >
-            Employee Roles
+            Employees
           </Typography>
-
-          <DoughnutChart />
+          <Box sx={{ mt: 2 }}>
+            <DoughnutChart />
+          </Box>
         </Paper>
       </Stack>
     </>

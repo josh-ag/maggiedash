@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@mui/material";
-import { Info, InfoOutlined, ReportOutlined } from "@mui/icons-material";
+import { Info, ReportOutlined } from "@mui/icons-material";
 import { blue, grey } from "@mui/material/colors";
 import { useLocation } from "react-router-dom";
 

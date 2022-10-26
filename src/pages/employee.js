@@ -1,6 +1,16 @@
 import React from "react";
-import { MessageLayout } from "../components/messages";
+import { Typography, Box } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
-const EmployeesPage = () => <MessageLayout message="Page currently empty" />;
+const EmployeesPage = () => (
+  <Box>
+    <Typography
+      variant="subtitle1"
+      sx={{ textAlign: "center", color: grey[600] }}
+    >
+      Nothing To Display
+    </Typography>
+  </Box>
+);
 
 export default EmployeesPage;

@@ -109,51 +109,51 @@ const drawerItems = [
     title: "Dashboard",
     path: "/",
     seg: "admin",
-    icon: <DashboardOutlined fontSize="medium" />,
+    icon: <DashboardOutlined />,
   },
   {
     title: "Late Notification",
     path: "/late-notification",
     seg: "admin",
-    icon: <ReportOutlined fontSize="medium" />,
+    icon: <ReportOutlined />,
   },
   {
     title: "Attendance Data",
     path: "/attendance",
     seg: "admin",
-    icon: <InsertChartOutlinedRounded fontSize="medium" />,
+    icon: <InsertChartOutlinedRounded />,
   },
   {
     title: "Visitors",
     path: "/visitors",
     seg: "admin",
-    icon: <PeopleAltOutlined fontSize="medium" />,
+    icon: <PeopleAltOutlined />,
   },
 
   {
     title: "Employee",
     path: "/employee",
     seg: "management",
-    icon: <PersonOutlineOutlined fontSize="medium" />,
+    icon: <PersonOutlineOutlined />,
   },
   {
     title: "Internals",
     path: "/internal",
     seg: "management",
-    icon: <GroupWorkOutlined fontSize="medium" />,
+    icon: <GroupWorkOutlined />,
   },
 
   {
     title: "Gate",
     path: "/gate",
     seg: "settings",
-    icon: <GroupsOutlined fontSize="medium" />,
+    icon: <GroupsOutlined />,
   },
   {
     title: "Card",
     path: "/card",
     seg: "settings",
-    icon: <CreditCardOutlined fontSize="medium" />,
+    icon: <CreditCardOutlined />,
   },
 ];
 
@@ -383,7 +383,7 @@ export const Layout = ({ children }) => {
 
       <Box
         sx={(theme) => ({
-          width: open ? `calc(100% - ${drawerWidth}px)` : `100%`,
+          width: open ? `calc(100vw - ${drawerWidth}px)` : `100%`,
           minHeight: "100vh",
           height: "100%",
         })}
@@ -451,6 +451,7 @@ export const Layout = ({ children }) => {
                   borderRadius: 10,
                   textTransform: "capitalize",
                   fontSize: 18,
+                  color: "#596884",
                 }}
                 endIcon={<KeyboardArrowDownOutlined />}
               >
